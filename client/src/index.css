@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root[theme="dark"] {
+    --textColor: #ffffff;
+    --bgColor: #252424;
+  }
+  :root[theme="light"] {
+    --textColor: #000000;
+    --bgColor: #ffffff;
+  }
+}
