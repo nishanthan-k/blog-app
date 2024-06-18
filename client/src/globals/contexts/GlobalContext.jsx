@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const GlobalContext = createContext();
 
@@ -6,10 +6,14 @@ const GlobalContextProvider = ({ children }) => {
   const [theme, setTheme] = useState();
 
   const updateTheme = () => {
-    const html = document.getAttribute("html");
-    const currTheme = html.getAttribute("theme");
-    setTheme(currTheme === "dark" ? "light" : "dark");
+    const htmlElement = document.querySelector("html");
+    const themeAttr = htmlElement.getAttribute("theme");
+    const newTheme = themeAttr === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    htmlElement.setAttribute("theme", newTheme);
   };
+
+  useEffect(() => updateTheme(), []);
 
   return (
     <GlobalContext.Provider value={{ theme, updateTheme }}>
