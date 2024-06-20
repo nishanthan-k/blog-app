@@ -3,19 +3,23 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import useMediaBreakpoint from "../hooks/useMediaBreakPoint.hook";
+import { loginSchema } from "../utils/validationSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const Login = () => {
   const isMediumScreen = useMediaBreakpoint("md");
   const form = useForm({
+    resolver: yupResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
-  const { register, handleSubmit } = form;
+  const { register, handleSubmit, formState } = form;
+  const { errors } = formState;
 
   const submitHandler = (data) => {
-    console.log(data);
+    // backend auth call
   };
 
   return (
@@ -30,10 +34,11 @@ const Login = () => {
           <input
             type="text"
             {...register("email", { required: "Email is required" })}
-            className="rounded-md h-10 md:h-12 px-2"
+            className="rounded-md h-10 md:h-12 px-2 outline-none focus:border-2 focus:border-black"
             placeholder="email@example.com"
             autoFocus
           ></input>
+          <p className="text-red-600">{errors?.email?.message}</p>
         </div>
 
         <div className="flex flex-col gap-3">
@@ -41,9 +46,10 @@ const Login = () => {
           <input
             type="text"
             {...register("password", { required: "Password is required" })}
-            className="rounded-md h-10 md:h-12 px-2"
+            className="rounded-md h-10 md:h-12 px-2 outline-none focus:border-2 focus:border-black"
             placeholder="password"
           ></input>
+          <p className="text-red-600">{errors?.password?.message}</p>
         </div>
 
         <Button
