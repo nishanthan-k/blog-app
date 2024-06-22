@@ -10,8 +10,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <GlobalContextProvider>
-        <section className="w-screen h-screen text-textColor bg-bgColor">
-          <App className="w-full h-full" />
+        <section className="w-screen text-textColor bg-bgColor">
+          <App className="w-full" />
         </section>
       </GlobalContextProvider>
     </BrowserRouter>

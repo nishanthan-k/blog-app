@@ -17,7 +17,9 @@ const useMediaBreakpoint = (resolution) => {
   }, []);
 
   useEffect(() => {
-    if (resolution === "md") {
+    if (resolution === 'sm') {
+      setMatches(windowInnerWidth <= 640);
+    } else if (resolution === "md") {
       setMatches(windowInnerWidth >= 768);
     } else if (resolution === "lg") {
       setMatches(windowInnerWidth >= 1024);

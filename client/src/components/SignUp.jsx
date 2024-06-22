@@ -24,7 +24,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col gap-6 justify-center items-center bg-slate-200 text-black overflow-hidden lg:text-lg">
+    <div className="w-full h-screen flex flex-col gap-6 justify-center items-center bg-slate-200 text-black overflow-hidden lg:text-lg">
       <h1 className="text-2xl font-semibold">Sign Up</h1>
       <form
         onSubmit={handleSubmit(submitHandler)}
