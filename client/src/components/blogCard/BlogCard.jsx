@@ -47,7 +47,7 @@ const BlogCard = (props) => {
     }));
   };
 
-  console.log(buttonsClicked["UpVote"]);
+  const handleBlog = (url) => window.open(url, "_blank");
 
   return (
     <div className="px-4">
@@ -72,6 +72,7 @@ const BlogCard = (props) => {
                   <FiExternalLink
                     size={20}
                     className="hover:text-gray-300 hover:cursor-pointer"
+                    onClick={() => handleBlog(data.url)}
                   />
                   <BsThreeDots
                     size={20}
