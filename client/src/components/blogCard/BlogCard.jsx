@@ -89,16 +89,21 @@ const BlogCard = (props) => {
           </section>
 
           <section>
-            <Img src={data["cover_image"]} unloader={ErrorImageLoader} />
+            <Img
+              src={data["cover_image"]}
+              unloader={ErrorImageLoader}
+              className="object-contain"
+            />
           </section>
 
           <section className="flex gap-6">
             {buttonData.map(({ Btn, count }, i) => (
               <div
+                key={i}
                 className="flex items-center gap-2"
                 onClickCapture={() => handleIcons(Btn)}
               >
-                <Btn clicked={buttonsClicked[`${Btn}`]} />
+                <Btn clicked={buttonsClicked[Btn.name]} />
                 {count && <p>{count}</p>}
               </div>
             ))}
