@@ -11,8 +11,8 @@ const getBlogs = requestHandler(async (req, res) => {
 
   const blogs = await response.json();
   res
-    .status(200) // Corrected typo: it should be res.status(200)
-    .json(new ApiResponse(200, blogs, "Blogs fetched successfully"));
+    .status(200)
+    .json(new ApiResponse(200, "Blogs fetched successfully", blogs));
 });
 
 export { getBlogs };
