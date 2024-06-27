@@ -5,9 +5,10 @@ const Home = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
+    const url = `${import.meta.env.VITE_RESTBASEURL}/blog/latest`;
     const fetchBlogs = async () => {
       try {
-        const response = await fetch("http://localhost:5000/blog/latest");
+        const response = await fetch(url);
 
         if (!response.ok) {
           throw new Error("Unable to fetch blogs");
@@ -15,7 +16,6 @@ const Home = () => {
 
         const data = await response.json();
         setBlogs(data.data);
-        console.log(data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
