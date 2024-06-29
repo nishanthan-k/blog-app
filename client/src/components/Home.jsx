@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import BlogCard from "./blogCard/BlogCard";
+import { blogUrls } from "../utils/apiUrls";
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_RESTBASEURL}/blog/latest`;
-    const fetchBlogs = async () => {
+    const url = `${blogUrls.fetchBlogs}`;
+
+    const handleFetchBlogs = async () => {
       try {
         const response = await fetch(url);
 
@@ -21,7 +23,7 @@ const Home = () => {
       }
     };
 
-    fetchBlogs();
+    handleFetchBlogs();
   }, []);
 
   return (

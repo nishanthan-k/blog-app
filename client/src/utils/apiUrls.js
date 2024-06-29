@@ -1,3 +1,7 @@
 import { restbaseurl } from "./constants";
 
-export const fetchBlogsApi = `${restbaseurl}/blog/latest`;
+const blogUrls = {
+  fetchBlogs: `${restbaseurl}/blog/latest`,
+};
+
+export { blogUrls };
