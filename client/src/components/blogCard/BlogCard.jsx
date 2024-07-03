@@ -3,14 +3,8 @@ import React, { useState } from "react";
 import { BsDot, BsThreeDots } from "react-icons/bs";
 import { FiExternalLink } from "react-icons/fi";
 import { Img } from "react-image";
+import { Comment, DownVote, Saved, UpVote } from "../../assets/images/SvgIcons";
 import BlogTag from "./BlogTag";
-import {
-  Comment,
-  DownVote,
-  Link,
-  Saved,
-  UpVote,
-} from "../../assets/images/SvgIcons";
 
 const ErrorImageLoader = () => <p>Error Loading Image...</p>;
 
@@ -57,9 +51,9 @@ const BlogCard = (props) => {
             <section className="flex">
               <div className="w-full flex justify-between">
                 <div className="flex gap-4">
-                  <Avatar img={data.user.profile_image} rounded />
+                  <Avatar img={data?.user.profile_image} rounded />
                   <div>
-                    <h2 className="font-semibold text-lg">{data.user.name}</h2>
+                    <h2 className="font-semibold text-lg">{data?.user.name}</h2>
                     <div className="flex items-end">
                       <span className="text-sm">{`${data["reading_time_minutes"]}m read time`}</span>
                       <BsDot />
@@ -72,7 +66,7 @@ const BlogCard = (props) => {
                   <FiExternalLink
                     size={20}
                     className="hover:text-gray-300 hover:cursor-pointer"
-                    onClick={() => handleBlog(data.url)}
+                    onClick={() => handleBlog(data?.url)}
                   />
                   <BsThreeDots
                     size={20}
@@ -84,16 +78,12 @@ const BlogCard = (props) => {
           )}
 
           <section className="flex flex-col gap-3">
-            <h1 className="text-lg font-semibold">{data.title}</h1>
+            <h1 className="text-lg font-semibold">{data?.title}</h1>
             {data["tag_list"] && <BlogTag tagList={data["tag_list"]} />}
           </section>
 
           <section>
-            <Img
-              src={data["cover_image"]}
-              unloader={ErrorImageLoader}
-              className="object-contain"
-            />
+            <img src={data["cover_image"]} className="object-contain" />
           </section>
 
           <section className="flex gap-6">

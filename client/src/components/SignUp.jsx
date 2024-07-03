@@ -1,12 +1,16 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Button } from "flowbite-react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useMediaBreakpoint from "../hooks/useMediaBreakPoint.hook";
 import { signUpSchema } from "../utils/validationSchema";
+import { authUrls } from "../utils/apiUrls";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const isMediumScreen = useMediaBreakpoint("md");
   const form = useForm({
     resolver: yupResolver(signUpSchema),
@@ -19,12 +23,53 @@ const SignUp = () => {
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  const submitHandler = (data) => {
-    // backend auth call
+  const submitHandler = async (data) => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+
+    const response = await fetch(`${authUrls.signUp}`, options);
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      toast.error(errorData.message || "An error occurred", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+
+    const result = await response.json();
+
+    toast.success(result?.message, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
+    localStorage.setItem("token", result?.data?.token);
+
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
 
   return (
     <div className="w-full h-screen flex flex-col gap-6 justify-center items-center bg-slate-200 text-black overflow-hidden lg:text-lg">
+      <ToastContainer />
       <h1 className="text-2xl font-semibold">Sign Up</h1>
       <form
         onSubmit={handleSubmit(submitHandler)}
