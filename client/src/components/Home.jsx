@@ -27,7 +27,7 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="py-4 flex flex-col gap-3">
+    <main className="py-4 grid sm:grid-cols-2 md:grid-cols-3 gap-y-4">
       {blogs.map((data, i) => (
         <BlogCard key={i} data={data} />
       ))}
